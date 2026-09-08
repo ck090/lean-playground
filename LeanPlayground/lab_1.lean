@@ -1,11 +1,11 @@
-variable (P Q R: Prop)
+variable (P Q R S T: Prop)
 
 example : P → P := by
   intro ih
   exact ih
 
 example : P → Q → P := by
-  intro ih1 _
+  intro ih1 _ih2
   exact ih1
 
 theorem modusPonens : P → (P → Q) → Q := by
@@ -25,10 +25,8 @@ example : (P → Q → R) → (P → Q) → (P → R) := by
   apply ih2
   exact ih3
 
-variable (S T : Prop)
-
 example : (P → R) → (S → Q) → (R → T) → (Q → R) → S → T := by
-  intro _ h2 h3 h4 h5
+  intro _i1 h2 h3 h4 h5
   apply h3
   apply h4
   apply h2
@@ -45,11 +43,11 @@ example : (P → Q) → ((P → Q) → P) → Q := by
 example : ((P → Q) → R) → ((Q → R) → P) → ((R → P) → Q) → P := by
   intro h1 h2 h3
   apply h2
-  intro _
+  intro _i1
   apply h1
   intro h5
   apply h3
-  intro _
+  intro _i2
   exact h5
 
 example : ((Q → P) → P) → (Q → R) → (R → P) → P := by
@@ -71,9 +69,9 @@ example :
   (((P → Q → Q) → ((P → Q) → Q)) → R) →
   ((((P → P) → Q) → (P → P → Q)) → R) →
   (((P → P → Q) → ((P → P) → Q)) → R) → R := by
-  intro _ h2 _
+  intro _i1 h2 _i2
   apply h2
-  intro t1 t2 _
+  intro t1 t2 _i3
   apply t1
-  intro _
+  intro _i4
   exact t2
